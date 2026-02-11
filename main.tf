@@ -26,6 +26,7 @@ resource "azurerm_virtual_network" "vnet" {
 
 }
 resource "azurerm_subnet" "subnet" {
+    depends_on = [ azurerm_resource_group.rgs , azurerm_virtual_network.vnet ]
 
   for_each             = var.subnet
   name                 = each.value.name
@@ -35,6 +36,7 @@ resource "azurerm_subnet" "subnet" {
 }
 
 resource "azurerm_public_ip" "pip" {
+    depends_on = [ azurerm_resource_group.rgs ]
 
   for_each            = var.pip
   name                = each.value.name
@@ -44,6 +46,7 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_network_interface" "nic" {
+    depends_on = [ azurerm_resource_group.rgs, azurerm_subnet.subnet, azurerm_public_ip.pip ]
 
   for_each            = var.nic
   name                = each.value.name
@@ -61,6 +64,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
+    depends_on = [ azurerm_resource_group.rgs, azurerm_virtual_network.vnet, azurerm_subnet.subnet, azurerm_public_ip.pip, azurerm_network_interface.nic ]
 
   for_each                        = var.vm
   name                            = each.value.name
