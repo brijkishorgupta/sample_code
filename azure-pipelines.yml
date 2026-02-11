@@ -1,0 +1,43 @@
+trigger: none 
+name: resource create
+pool: agent-ka -jhund
+jobs:
+- job: 1
+  steps: 
+  - task: TerraformInstaller@1
+    displayName: terraform install
+    inputs:
+      terraformVersion: 'latest'
+
+  - task: TerraformTask@5
+    displayName: terraform init
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      backendServiceArm: 'ajent-ka-jhuund'
+      backendAzureRmOverrideSubscriptionID: '538f56b2-294c-4e41-a854-7ab1b5d5ad51'
+      backendAzureRmResourceGroupName: 'rg_infra'
+      backendAzureRmStorageAccountName: 'storageinfra'
+      backendAzureRmContainerName: 'contenerinfra'
+      backendAzureRmKey: 'khushali.tfstate'
+
+  - task: TerraformTask@5
+    displayName: terraform plan
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      environmentServiceNameAzureRM: 'ajent-ka-jhuund'
+
+  - task: TerraformTask@5
+    displayName: terraform apply
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      commandOptions: '-auto-approve'
+      environmentServiceNameAzureRM: 'ajent-ka-jhuund'
+  
+
+
