@@ -2,7 +2,7 @@ trigger: none
 name: resource create
 pool: agent-ka -jhund
 jobs:
-- job: 1
+- job: 
   steps: 
   - task: TerraformInstaller@1
     displayName: terraform install
