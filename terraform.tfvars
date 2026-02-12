@@ -71,7 +71,7 @@ vm = {
     resource_group_name = "briju"
     location            = "west europe"
 
-    size                            = "Standard_B1s"
+    size                            = "Standard_D2s_v5"
     admin_username                  = "azureuser"
     admin_password                  = "Azure12345678"
     disable_password_authentication = false
