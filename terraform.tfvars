@@ -1,6 +1,6 @@
 name = {
   "rg1" = {
-    name     = "briju"
+    name     = "triju"
     location = "west europe"
   }
   
@@ -8,8 +8,8 @@ name = {
 }
 storage_account = {
   "sa1" = {
-    name                     = "brijustorageacc"
-    resource_group_name      = "briju"
+    name                     = "trijustorageacc"
+    resource_group_name      = "triju"
     location                 = "west europe"
     account_tier             = "Standard"
     account_replication_type = "LRS"
@@ -20,8 +20,8 @@ storage_account = {
 vnet = {
 
   "vnet1" = {
-    name                = "brijuvnet1"
-    resource_group_name = "briju"
+    name                = "triju-vnet1"
+    resource_group_name = "triju"
     location            = "west europe"
     address_space       = ["10.0.0.0/16"]
   }
@@ -29,9 +29,9 @@ vnet = {
 }
 subnet = {
   "subnet1" = {
-    name                 = "brijusubnet1"
-    resource_group_name  = "briju"
-    virtual_network_name = "brijuvnet1"
+    name                 = "trijusubnet1"
+    resource_group_name  = "triju"
+    virtual_network_name = "triju-vnet1"
     address_prefixes     = ["10.0.1.0/24"]
 
   }
@@ -40,8 +40,8 @@ subnet = {
 }
 pip = {
   "pip1" = {
-    name                = "brijupip1"
-    resource_group_name = "briju"
+    name                = "trijupip1"
+    resource_group_name = "triju"
     location            = "west europe"
     allocation_method   = "Static"
   }
@@ -49,10 +49,10 @@ pip = {
 
 nic = {
   "nic1" = {
-    name                = "brijunic1"
-    resource_group_name = "briju"
+    name                = "trijunic1"
+    resource_group_name = "triju"
     location            = "west europe"
-    subnet_name = "brijusubnet1"
+    subnet_name = "trijusubnet1"
     subnet_key  = "subnet1"
     pip_key     = "pip1"
     ip_configuration = [
@@ -67,8 +67,8 @@ nic = {
 
 vm = {
   "vm1" = {
-    name                = "brijuvm1"
-    resource_group_name = "briju"
+    name                = "trijuvm1"
+    resource_group_name = "triju"
     location            = "west europe"
 
     size                            = "Standard_D2s_v5"
