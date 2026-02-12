@@ -38,6 +38,14 @@ jobs:
       workingDirectory: '$(System.DefaultWorkingDirectory)/'
       commandOptions: '-auto-approve'
       environmentServiceNameAzureRM: 'ajent-ka-jhuund'
+
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'destroy'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      commandOptions: '-auto-approve'
+      environmentServiceNameAzureRM: 'ajent-ka-jhuund'
   
 
 
