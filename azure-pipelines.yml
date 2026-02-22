@@ -1,6 +1,10 @@
 trigger: none 
 name: resource create
 pool: agent-ka -jhund
+variables:
+   directory_path: 'System.DefaultWorkingDirectory'
+
+
 jobs:
 - job: 
   steps: 
@@ -14,7 +18,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      workingDirectory: $(directory_path)
       backendServiceArm: 'ajent-ka-jhuund'
       backendAzureRmOverrideSubscriptionID: '538f56b2-294c-4e41-a854-7ab1b5d5ad51'
       backendAzureRmResourceGroupName: 'rg_infra'
@@ -27,18 +31,21 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      workingDirectory: $(directory_path)
       environmentServiceNameAzureRM: 'ajent-ka-jhuund'
-
 
   - task: TerraformTask@5
-    displayName: terraform destry
     inputs:
       provider: 'azurerm'
-      command: 'destroy'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/'
+      command: 'apply'
+      workingDirectory: '$(directory_path)'
       commandOptions: '-auto-approve'
       environmentServiceNameAzureRM: 'ajent-ka-jhuund'
+
+
+ 
+
+
   
 
 
